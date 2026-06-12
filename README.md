@@ -1,93 +1,199 @@
-# 🌾 AgriYield — Crop Yield Prediction System
+<div align="center">
 
-A polished, production-ready Next.js web app that predicts crop yield (tons/hectare)
-using a machine-learning model trained on regional, soil, weather, and farming-practice data.
+# 🌾 AgriYield
 
-The trained scikit-learn pipeline (`OneHotEncoder` + `LinearRegression`) has been
-faithfully ported to pure JavaScript (`lib/model.js`), so predictions run
-instantly in the browser — no Python backend, no API calls, nothing to break.
+### AI-Powered Crop Yield Prediction Platform
 
-## Features
+<img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js"/>
+<img src="https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react"/>
+<img src="https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css"/>
+<img src="https://img.shields.io/badge/Machine%20Learning-Linear%20Regression-success?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge"/>
 
-- ⚡ Instant client-side predictions (no server round trip)
-- 🌍 4 languages: English, Hindi, Spanish, French
-- 🌗 Dark / Light theme with system preference detection
-- 📊 Visual factor breakdown for every prediction
-- 🕓 Prediction history (saved locally in your browser)
-- 📤 Share & download results
-- 📱 Fully responsive, accessible (keyboard focus, reduced motion)
+### 🚀 Browser-Based Machine Learning Inference with Zero Backend
 
-## Tech Stack
+</div>
 
-- Next.js 14 (App Router)
-- React 18
-- Tailwind CSS
-- Zero external ML/runtime dependencies
+---
 
-## Local Development
+# 📖 Overview
+
+AgriYield is a production-ready crop yield prediction platform built using Next.js and Machine Learning.
+
+The application predicts agricultural productivity (tons/hectare) using environmental and farming-related features such as:
+
+* Region
+* Soil Type
+* Crop Type
+* Rainfall
+* Temperature
+* Fertilizer Usage
+* Irrigation
+* Weather Conditions
+* Days to Harvest
+
+Unlike traditional ML deployments, predictions run entirely inside the browser.
+
+No Python server.
+
+No APIs.
+
+No database.
+
+No cloud inference costs.
+
+---
+
+# 🧠 Machine Learning Model
+
+The prediction engine is based on a Scikit-Learn Linear Regression pipeline trained and evaluated separately.
+
+### Model Performance
+
+| Metric   | Score  |
+| -------- | ------ |
+| Train R² | 0.8869 |
+| Test R²  | 0.8815 |
+
+### Why Linear Regression?
+
+✅ Strong Generalization
+
+✅ Minimal Overfitting
+
+✅ Fast Inference
+
+✅ Easy Interpretability
+
+---
+
+# ⚡ Unique Engineering Approach
+
+Instead of deploying a Python backend:
+
+```text
+Scikit-Learn Model
+        ↓
+Extract Coefficients
+        ↓
+Convert to JSON
+        ↓
+Rebuild Inference Logic
+        ↓
+Run Predictions in Browser
+```
+
+This enables:
+
+* Instant Predictions
+* Zero Server Costs
+* Faster Response Time
+* Simplified Deployment
+
+---
+
+# ✨ Features
+
+✅ Real-Time Yield Prediction
+
+✅ Browser-Side Machine Learning
+
+✅ Multi-Language Support
+
+✅ Dark / Light Mode
+
+✅ Prediction History
+
+✅ Share & Download Results
+
+✅ Fully Responsive Design
+
+✅ Accessibility Support
+
+---
+
+# 🌍 Supported Languages
+
+* English
+* Hindi
+* Spanish
+* French
+
+---
+
+# 🛠 Tech Stack
+
+```text
+Next.js 14
+React 18
+Tailwind CSS
+JavaScript
+Machine Learning
+Scikit-Learn
+Linear Regression
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+app/
+components/
+lib/
+public/
+package.json
+tailwind.config.js
+```
+
+---
+
+# 🔗 Related Repository
+
+Machine Learning Training Repository:
+
+crop-yield-prediction-linear-regression
+
+Contains:
+
+* Data Cleaning
+* EDA
+* Model Training
+* Model Evaluation
+* Pipeline Creation
+
+---
+
+# 🚀 Deployment
+
+Hosted on Vercel.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000
+---
 
-## Deploy to Vercel
+# 🎯 Future Improvements
 
-1. Push this folder to a GitHub repository.
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repo.
-3. Vercel auto-detects Next.js — no configuration needed.
-4. Click **Deploy**.
+* Weather API Integration
+* Real-Time Forecasting
+* XGBoost Version
+* Farmer Dashboard
+* Mobile Application
+* GIS Integration
 
-That's it — no environment variables, no database, no Python runtime required.
+---
 
-## Project Structure
+# 👨‍💻 Author
 
-```
-app/
-  page.js          → Home
-  predict/page.js  → Prediction form + results
-  history/page.js  → Saved predictions
-  about/page.js    → About / methodology
-  layout.js        → Root layout, fonts, providers
-  globals.css      → Theme tokens & global styles
-components/
-  Navbar.js
-  Footer.js
-lib/
-  model.js         → Ported ML model (coefficients extracted from .pkl)
-  i18n.js          → Translations (en, hi, es, fr)
-  LanguageContext.js
-  ThemeContext.js
-  history.js        → localStorage-based history
-```
+### Raj Kumar
 
-## Updating the Model
+B.Tech CSE (AI & ML)
 
-If you retrain the model, re-export its parameters into `lib/model.js`:
+Amity University Jharkhand
 
-```python
-import joblib, json
+Building AI + Software Projects
 
-pipeline = joblib.load("crop_yield_pipeline.pkl")
-pre = pipeline.named_steps["preprocessor"]
-ohe = pre.named_transformers_["categorical"]
-lr = pipeline.named_steps["model"]
-
-cat_cols = ["Region", "Soil_Type", "Crop", "Weather_Condition"]
-num_cols = ["Rainfall_mm", "Temperature_Celsius", "Fertilizer_Used", "Irrigation_Used", "Days_to_Harvest"]
-
-categories = {c: list(v) for c, v in zip(cat_cols, ohe.categories_)}
-feat_names = [f"{c}__{v}" for c, vals in zip(cat_cols, ohe.categories_) for v in vals] + num_cols
-coefficients = dict(zip(feat_names, lr.coef_.tolist()))
-
-print(json.dumps({
-    "intercept": float(lr.intercept_),
-    "categories": categories,
-    "coefficients": coefficients,
-    "numericalCols": num_cols,
-}, indent=2))
-```
-
-Paste the resulting values into `MODEL_PARAMS` in `lib/model.js`.
+</div>
