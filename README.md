@@ -1,8 +1,6 @@
-<div align="center">
-
 # 🌾 AgriYield
 
-### AI-Powered Crop Yield Prediction Platform
+### Machine Learning-Powered Crop Yield Prediction Platform
 
 <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js"/>
 <img src="https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react"/>
@@ -12,13 +10,11 @@
 
 ### 🚀 Browser-Based Machine Learning Inference with Zero Backend
 
-</div>
-
 ---
 
 # 📖 Overview
 
-AgriYield is a production-ready crop yield prediction platform built using Next.js and Machine Learning.
+AgriYield is a crop yield prediction platform built using Next.js and Machine Learning.
 
 The application predicts agricultural productivity (tons/hectare) using environmental and farming-related features such as:
 
@@ -34,21 +30,18 @@ The application predicts agricultural productivity (tons/hectare) using environm
 
 Unlike traditional ML deployments, predictions run entirely inside the browser.
 
-No Python server.
-
-No APIs.
-
-No database.
-
-No cloud inference costs.
+* No Python server
+* No APIs
+* No database
+* No cloud inference costs
 
 ---
 
 # 🧠 Machine Learning Model
 
-The prediction engine is based on a Scikit-Learn Linear Regression pipeline trained and evaluated separately.
+The prediction engine is based on a Scikit-Learn Linear Regression pipeline trained, evaluated, and serialized in a separate Machine Learning repository.
 
-### Model Performance
+## Model Performance
 
 | Metric   | Score  |
 | -------- | ------ |
@@ -67,28 +60,35 @@ The prediction engine is based on a Scikit-Learn Linear Regression pipeline trai
 
 ---
 
-# ⚡ Unique Engineering Approach
+# ⚡ Deployment Architecture
 
-Instead of deploying a Python backend:
+The original model was trained using Scikit-Learn.
+
+For deployment, the learned coefficients and intercept were extracted from the trained model and implemented in JavaScript, allowing predictions to run directly in the browser without requiring a backend server.
 
 ```text
-Scikit-Learn Model
+Training Dataset
         ↓
-Extract Coefficients
+Scikit-Learn Pipeline
         ↓
-Convert to JSON
+Linear Regression Model
         ↓
-Rebuild Inference Logic
+Coefficient Extraction
         ↓
-Run Predictions in Browser
+JavaScript Inference Engine
+        ↓
+Next.js Web Application
+        ↓
+Browser Prediction
 ```
 
-This enables:
+This approach provides:
 
 * Instant Predictions
 * Zero Server Costs
 * Faster Response Time
 * Simplified Deployment
+* No Backend Infrastructure
 
 ---
 
@@ -96,7 +96,7 @@ This enables:
 
 ✅ Real-Time Yield Prediction
 
-✅ Browser-Side Machine Learning
+✅ Browser-Side Machine Learning Inference
 
 ✅ Multi-Language Support
 
@@ -128,9 +128,9 @@ Next.js 14
 React 18
 Tailwind CSS
 JavaScript
-Machine Learning
 Scikit-Learn
 Linear Regression
+Machine Learning
 ```
 
 ---
@@ -150,17 +150,19 @@ tailwind.config.js
 
 # 🔗 Related Repository
 
-Machine Learning Training Repository:
+### Machine Learning Training Repository
 
 crop-yield-prediction-linear-regression
 
 Contains:
 
 * Data Cleaning
-* EDA
+* Exploratory Data Analysis (EDA)
+* Feature Engineering
 * Model Training
 * Model Evaluation
 * Pipeline Creation
+* Model Serialization
 
 ---
 
@@ -177,6 +179,7 @@ npm run dev
 
 # 🎯 Future Improvements
 
+* FastAPI Model Serving Version
 * Weather API Integration
 * Real-Time Forecasting
 * XGBoost Version
@@ -194,6 +197,4 @@ B.Tech CSE (AI & ML)
 
 Amity University Jharkhand
 
-Building AI + Software Projects
-
-</div>
+Building AI, Machine Learning & Software Projects
